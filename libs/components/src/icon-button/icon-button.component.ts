@@ -106,6 +106,7 @@ export class BitIconButtonComponent {
       "before:tw-rounded-md",
       "before:tw-transition",
       "before:tw-ring",
+      "before:tw-ring-transparent",
       "focus-visible:before:tw-ring-text-contrast",
       "focus-visible:tw-z-10",
     ]
