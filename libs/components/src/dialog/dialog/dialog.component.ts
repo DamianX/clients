@@ -6,6 +6,7 @@ import { Component, Input } from "@angular/core";
 })
 export class DialogComponent {
   @Input() dialogSize: "small" | "default" | "large" = "default";
+  @Input() contentPadding = true;
 
   get width() {
     switch (this.dialogSize) {
