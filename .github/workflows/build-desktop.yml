@@ -290,30 +290,6 @@ jobs:
           choco --version
           rustup show
 
-      - name: Login to Azure
-        uses: Azure/login@1f63701bf3e6892515f1b7ce2d2bf1708b46beaf
-        with:
-          creds: ${{ secrets.AZURE_PROD_KV_CREDENTIALS }}
-
-      - name: Retrieve secrets
-        id: retrieve-secrets
-        shell: bash
-        env:
-          KEYVAULT: bitwarden-prod-kv
-          SECRETS: |
-            code-signing-vault-url,
-            code-signing-client-id,
-            code-signing-tenant-id,
-            code-signing-client-secret,
-            code-signing-cert-name
-        run: |
-          for i in ${SECRETS//,/ }
-          do
-            VALUE=$(az keyvault secret show --vault-name $KEYVAULT --name $i --query value --output tsv)
-            echo "::add-mask::$VALUE"
-            echo "::set-output name=$i::$VALUE"
-          done
-
       - name: Install Node dependencies
         run: npm ci
         working-directory: ./
